@@ -1,5 +1,5 @@
 // import stlye from styles file
-import { StyledBckgr } from "./Escena.styles";
+import { StyledBckgr } from "./App.styles";
 
 export const Background = ({
   imgurl,

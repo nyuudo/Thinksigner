@@ -1,4 +1,4 @@
-import { HeaderArea, ButtonCurrent } from "./Header.styles";
+import { HeaderArea, ButtonCurrent } from "./App.styles";
 
 // define the type of props allowed for the children
 type HeaderProps = { back(): void; ahead(): void };

@@ -1,15 +1,17 @@
 // import stlye from styles file
-import { StyledDiv } from "./Escena.styles";
+import { StyledDiv } from "./App.styles";
 // added property type to PROPS
 export const Escena = ({
   id,
   text,
-  level,
+  currentScene,
 }: {
   id: number;
   text: string;
-  level: number;
+  currentScene: number;
 }) => {
   // use a conditional props to determine the style component
-  return <StyledDiv active={level === id ? true : false}>{text}</StyledDiv>;
+  return (
+    <StyledDiv active={currentScene === id ? true : false}>{text}</StyledDiv>
+  );
 };

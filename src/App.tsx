@@ -8,37 +8,37 @@ import { Background } from "./components/Background";
 
 function App() {
   // define the state of Welcome component
-  const [firstPage, setPage] = useState(true);
-  const [level, setLevel] = useState(1);
+  const [firstPage, setFirstPage] = useState(true);
+  const [currentScene, setCurrentScene] = useState(1);
   const [background, setBackground] = useState(`img/1.jpg`);
 
   // define a function that will be used by the right button
   const GoAhead = () => {
-    if (level < scenes.length) {
-      setLevel(level + 1);
-      setBackground(`img/${level + 1}.jpg`);
+    if (currentScene < scenes.length) {
+      setCurrentScene(currentScene + 1);
+      setBackground(`img/${currentScene + 1}.jpg`);
     }
-    if (level >= scenes.length) {
-      setLevel(1);
+    if (currentScene >= scenes.length) {
+      setCurrentScene(1);
       setBackground(`img/1.jpg`);
     }
   };
   // define a function that will be used by the left button
   const GoBack = () => {
-    if (level <= scenes.length) {
-      setLevel(level - 1);
-      setBackground(`img/${level - 1}.jpg`);
+    if (currentScene <= scenes.length) {
+      setCurrentScene(currentScene - 1);
+      setBackground(`img/${currentScene - 1}.jpg`);
     }
 
-    if (level === 1) {
-      setLevel(4);
+    if (currentScene === 1) {
+      setCurrentScene(4);
       setBackground(`img/4.jpg`);
     }
   };
 
   // define a function to set the change of state
   const GoPage = () => {
-    setPage(false);
+    setFirstPage(false);
   };
 
   // return a conditional ternary to hide or show the nextpage
@@ -49,7 +49,12 @@ function App() {
       <Background imgurl={background}>
         <Header back={GoBack} ahead={GoAhead} />
         {scenes.map((item) => (
-          <Escena key={item.id} id={item.id} text={item.escena} level={level} />
+          <Escena
+            key={item.id}
+            id={item.id}
+            text={item.escena}
+            currentScene={currentScene}
+          />
         ))}
       </Background>
     </>

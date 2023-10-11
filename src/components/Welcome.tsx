@@ -1,4 +1,4 @@
-import { WelcomeArea, WelcomButton } from "./Welcome.styles";
+import { WelcomeArea, WelcomButton } from "./App.styles";
 
 type WelcomeProps = { next(): void };
 
