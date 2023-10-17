@@ -1,38 +1,37 @@
-// import JSON file "as it is" without defining a constant or export to avoid TypeScript Error
-import scenes from "./data/scenes.json";
-import { Escena } from "./components/Escena";
-import { Header } from "./components/Header";
+import topics from "./data/topics.json";
 import { useState } from "react";
 import { Welcome } from "./components/Welcome";
 import { Background } from "./components/Background";
+import { Controls } from "./components/Controls";
+import { Topic } from "./components/Topic";
 
 function App() {
   // define the state of Welcome component
   const [firstPage, setFirstPage] = useState(true);
-  const [currentScene, setCurrentScene] = useState(1);
-  const [background, setBackground] = useState(`img/1.jpg`);
+  const [currentTopic, setCurrentTopic] = useState(1);
+  const [background, setBackground] = useState(`img/1.webp`);
 
   // define a function that will be used by the right button
   const GoAhead = () => {
-    if (currentScene < scenes.length) {
-      setCurrentScene(currentScene + 1);
-      setBackground(`img/${currentScene + 1}.jpg`);
+    if (currentTopic < topics.length) {
+      setCurrentTopic(currentTopic + 1);
+      setBackground(`img/${currentTopic + 1}.webp`);
     }
-    if (currentScene >= scenes.length) {
-      setCurrentScene(1);
-      setBackground(`img/1.jpg`);
+    if (currentTopic >= topics.length) {
+      setCurrentTopic(1);
+      setBackground(`img/1.webp`);
     }
   };
   // define a function that will be used by the left button
   const GoBack = () => {
-    if (currentScene <= scenes.length) {
-      setCurrentScene(currentScene - 1);
-      setBackground(`img/${currentScene - 1}.jpg`);
+    if (currentTopic <= topics.length) {
+      setCurrentTopic(currentTopic - 1);
+      setBackground(`img/${currentTopic - 1}.webp`);
     }
 
-    if (currentScene === 1) {
-      setCurrentScene(4);
-      setBackground(`img/4.jpg`);
+    if (currentTopic === 1) {
+      setCurrentTopic(4);
+      setBackground(`img/4.webp`);
     }
   };
 
@@ -41,21 +40,30 @@ function App() {
     setFirstPage(false);
   };
 
+  const GoStart = () => {
+    setFirstPage(true);
+  };
+
   // return a conditional ternary to hide or show the nextpage
   return firstPage === true ? (
     <Welcome next={GoPage} />
   ) : (
     <>
       <Background imgurl={background}>
-        <Header back={GoBack} ahead={GoAhead} />
-        {scenes.map((item) => (
-          <Escena
-            key={item.id}
-            id={item.id}
-            text={item.escena}
-            currentScene={currentScene}
-          />
-        ))}
+        <div>
+          {topics
+            .filter((item) => item.id === currentTopic)
+            .map((item) => (
+              <Topic
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                text={item.description}
+                currentTopic={currentTopic}
+              />
+            ))}
+          <Controls back={GoBack} ahead={GoAhead} start={GoStart} />
+        </div>
       </Background>
     </>
   );
