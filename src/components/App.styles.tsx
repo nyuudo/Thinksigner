@@ -1,91 +1,177 @@
 import styled from "styled-components";
+import topics from "../data/topics.json";
+import type { activeProps, urlimgProps, TopicWrapperProps } from "../types";
 
-export const WelcomeArea = styled.div`
-  @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
-  font-family: Rubik, sans-serif;
-  h1 {
-    color: #192a56;
-    margin-bottom: 0;
-  }
-  h3 {
-    color: #7f7f7f;
-  }
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  padding: 0px 42px;
-  max-width: 375px;
-  height: 375px;
-  border-radius: 8px;
-  background: #e0e0e0;
-  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-`;
-
-export const WelcomButton = styled.button`
-  border: none;
-  border-radius: 8px;
-  width: 120px;
-  height: 60px;
-  text-decoration: none;
-  color: #fbc531;
-  background-color: #192a56;
-  transition-duration: 0.4s;
-  &:hover {
-    color: #192a56;
-    background-color: #fbc531;
-  }
-`;
-
-export const HeaderArea = styled.header`
-  display: grid;
-  grid-template: 64px/ 1fr 1fr;
-  gap: 0.5rem;
-  margin: 16px;
-`;
-
-export const ButtonCurrent = styled.button`
-  @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
-  font-family: Rubik, sans-serif;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #192a56;
-  background-color: #fbc531;
-  transition-duration: 0.4s;
-  &:hover {
-    color: #fbc531;
-    background-color: #192a56;
-  }
-`;
-
-// declare the type for the boolean props
-type activeProps = { active: boolean };
-
-//include as a generic next to div
-export const StyledDiv = styled.p<activeProps>`
-  @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
-  font-family: Rubik, sans-serif;
-  font-size: 1rem;
-  color: #658ba3;
-  text-align: center;
-  border: 2px solid #192a56;
-  border-radius: 32px;
-  padding: 16px 16px;
-  margin: 8px 16px;
-  background-color: ${({ active }) =>
-    active ? "#192a56" : "rgba(255,255,255,0.9)"};
-`;
-
-// declare the type for the ---- props
-type urlimgProps = { urlimg: unknown };
-
-//include as a generic next to div
-export const StyledBckgr = styled.div<urlimgProps>`
+export const WelcomeBckgr = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
   background: center/cover;
-  background-image: ${(props) => `url(${props.urlimg})`};
+  background-image: url(../img/cover.webp);
+`;
+
+export const WelcomeArea = styled.div`
+  margin: auto;
+  display: flex;
+  gap: 0.875rem;
+  flex-direction: column;
+  max-width: 20rem;
+
+  h1 {
+    color: #004080;
+    margin: 0;
+    mix-blend-mode: multiply;
+  }
+  span {
+    color: #5e666e;
+    mix-blend-mode: multiply;
+    margin: 0;
+  }
+  h2 {
+    font-size: 1rem;
+    color: #5a5a5a;
+    margin: 0;
+    mix-blend-mode: multiply;
+  }
+  p {
+    font-size: 0.875rem;
+    color: #5a5a5a;
+    margin: 0;
+    mix-blend-mode: multiply;
+  }
+`;
+
+export const WelcomeButton = styled.button`
+  border: none;
+  border-radius: 19px;
+  width: 35%;
+  height: 38px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #192a56;
+  background-color: #f8d12f;
+  transition-duration: 0.4s;
+  &:hover {
+    color: #f8d12f;
+    background-color: #192a56;
+    scale: 95%;
+  }
+`;
+
+export const StyledBckgr = styled.div<urlimgProps>`
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100vh;
+  background: center/cover;
+  background-repeat: no-repeat;
+  background-image: ${({ urlimg }) => `url(${urlimg})`};
+
+  @media (max-width: 1024px) {
+    background-position: center top;
+  }
+
+  @media (max-width: 768px) {
+    background-position: calc(50% + 300px) top;
+  }
+
+  @media (max-width: 640px) {
+    background-position: calc(50% + 100px) top;
+  }
+
+  @media (max-width: 375px) {
+    background-position: calc(50% + 200px) top;
+  }
+`;
+
+export const ControlsArea = styled.header`
+  display: flex;
+  gap: 0.5rem;
+  margin: 2rem 1.25rem;
+`;
+
+export const ButtonCurrent = styled.button`
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #192a56;
+  background-color: #f8d12f;
+  transition-duration: 0.4s;
+  &:hover {
+    color: #f8d12f;
+    background-color: #192a56;
+    scale: 95%;
+  }
+`;
+
+export const ButtonClose = styled.button`
+  width: 76px;
+  height: 38;
+  border-radius: 19px;
+  border: none;
+  font-weight: 700;
+  text-decoration: none;
+  color: #192a56;
+  background-color: #f8d12f;
+  transition-duration: 0.4s;
+  &:hover {
+    color: #f8d12f;
+    background-color: #192a56;
+    scale: 95%;
+  }
+`;
+
+export const TopicWrapper = styled.div<TopicWrapperProps>`
+  margin: 1.25rem;
+  max-width: 20.9375rem;
+  z-index: ${(props) =>
+    props.active ? topics.length + 1 : topics.length - props.topicid};
+`;
+
+export const StyledTopic = styled.div<activeProps>`
+  h1 {
+    color: ${({ activeid }) => {
+      if (activeid === 1) return "#1e3899";
+      if (activeid === 2) return "#f74672";
+      if (activeid === 3) return "#f8d12f";
+      if (activeid === 4) return "#2673a7";
+      return "white";
+    }};
+    text-shadow: ${({ activeid }) => {
+      if (activeid === 2) return "2px 2px 6px #1a2d31";
+      if (activeid === 3) return "2px 2px 6px #1a2d31";
+      return "none";
+    }};
+    mix-blend-mode: ${({ activeid }) => {
+      if (activeid === 1) return "multiply";
+      if (activeid === 4) return "multiply";
+      return "none";
+    }};
+    margin-block-start: 0rem;
+    margin-block-end: 0rem;
+  }
+
+  p {
+    color: ${({ activeid }) => {
+      if (activeid === 3) return "#f8d12f";
+      if (activeid === 4) return "#2673a7";
+      return "white";
+    }};
+    text-shadow: ${({ activeid }) => {
+      if (activeid === 1) return "2px 2px 6px #1a2d31";
+      if (activeid === 2) return "2px 2px 6px #1a2d31";
+      if (activeid === 3) return "2px 2px 6px #1a2d31";
+      return "none";
+    }};
+    mix-blend-mode: ${({ activeid }) => {
+      if (activeid === 4) return "multiply";
+      return "none";
+    }};
+  }
 `;
