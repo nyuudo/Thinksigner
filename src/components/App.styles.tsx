@@ -7,7 +7,7 @@ export const WelcomeBckgr = styled.div`
   flex-direction: column;
   height: 100vh;
   background: center/cover;
-  background-image: url(../img/cover.webp);
+  background-image: url(img/cover.webp);
 `;
 
 export const WelcomeArea = styled.div`
