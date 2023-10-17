@@ -45,7 +45,7 @@ Error generating stack: `+o.message+`
   flex-direction: column;
   height: 100vh;
   background: center/cover;
-  background-image: url(../img/cover.webp);
+  background-image: url(img/cover.webp);
 `,Em=Je.div`
   margin: auto;
   display: flex;
